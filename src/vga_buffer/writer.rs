@@ -122,7 +122,7 @@ impl Writer {
             .for_each(|(col, new_value)| col.write(*new_value));
     }
 
-    pub fn set_current_row_volitile(&mut self, value: &mut [Volatile<ScreenChar>]) {
+    pub fn set_current_row_volatile(&mut self, value: &mut [Volatile<ScreenChar>]) {
         let current_row = self.current_row_mut();
         current_row
             .iter_mut()
@@ -142,7 +142,7 @@ impl Writer {
             .for_each(|(col, value)| col.write(*value));
     }
 
-    pub fn set_row_volitile(&mut self, row: usize, value: &[Volatile<ScreenChar>]) {
+    pub fn set_row_volatile(&mut self, row: usize, value: &[Volatile<ScreenChar>]) {
         let current_row = self.get_row_mut(row);
         current_row
             .iter_mut()
