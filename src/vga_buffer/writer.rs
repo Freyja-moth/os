@@ -65,7 +65,7 @@ impl Writer {
         self.color_code.set_foreground(color);
     }
 
-    pub fn foreground(&self) -> &Color {
+    pub fn foreground_color(&self) -> &Color {
         self.color_code.foreground()
     }
 
