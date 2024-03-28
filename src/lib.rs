@@ -18,7 +18,6 @@ pub mod vga_buffer;
 #[cfg(test)]
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-    #[cfg(test)]
     test_main();
     loop {}
 }
@@ -28,7 +27,6 @@ fn panic_handler(info: &PanicInfo) -> ! {
     if cfg!(test) {
         serial_println!("[failed]\n");
         serial_println!("Error: {}\n", info);
-
         QemuExitCode::Failed.send();
     } else {
         println!("{info}");
