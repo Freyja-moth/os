@@ -23,15 +23,33 @@ impl Default for ScreenChar {
     fn default() -> Self {
         Self {
             ascii_character: b' ',
-            color_code: Default::default(),
+            color_code: ColorCode::default().into(),
         }
     }
 }
 impl ScreenChar {
-    pub fn new(character: char, color: ColorCode) -> Self {
-        Self {
-            ascii_character: character as u8,
-            color_code: color.into(),
-        }
+    pub fn new() -> Self {
+        Self::default()
+    }
+    pub fn with_character(mut self, character: char) -> Self {
+        self.ascii_character = character as u8;
+        self
+    }
+    pub fn set_character(&mut self, character: char) {
+        self.ascii_character = character as u8;
+    }
+    pub fn character(&self) -> char {
+        self.ascii_character as char
+    }
+
+    pub fn with_colorcode(mut self, color: ColorCode) -> Self {
+        self.color_code = color.into();
+        self
+    }
+    pub fn set_colorcode(&mut self, color: ColorCode) {
+        self.color_code = color.into();
+    }
+    pub fn colorcode(&self) -> ColorCode {
+        self.color_code.try_into().unwrap()
     }
 }

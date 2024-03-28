@@ -8,6 +8,16 @@ impl From<ColorCode> for u8 {
         (value.background as u8) << 4 | value.foreground as u8
     }
 }
+impl TryFrom<u8> for ColorCode {
+    type Error = InvalidColor;
+
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
+        Ok(Self {
+            foreground: (value | 0x0f).try_into()?,
+            background: ((value | 0xf0) >> 4).try_into()?,
+        })
+    }
+}
 impl ColorCode {
     pub fn new(foreground: Color, background: Color) -> Self {
         Self {
@@ -39,6 +49,9 @@ impl ColorCode {
     }
 }
 
+#[derive(Debug)]
+pub struct InvalidColor;
+
 #[derive(Clone, PartialEq, Eq, Default, Debug)]
 pub enum Color {
     #[default]
@@ -58,4 +71,29 @@ pub enum Color {
     Pink,
     Yellow,
     White,
+}
+impl TryFrom<u8> for Color {
+    type Error = InvalidColor;
+
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
+        match value {
+            0 => Ok(Self::Black),
+            1 => Ok(Self::Blue),
+            2 => Ok(Self::Green),
+            3 => Ok(Self::Cyan),
+            4 => Ok(Self::Red),
+            5 => Ok(Self::Magenta),
+            6 => Ok(Self::Brown),
+            7 => Ok(Self::LightGray),
+            8 => Ok(Self::DarkGray),
+            9 => Ok(Self::LightBlue),
+            10 => Ok(Self::LightGreen),
+            11 => Ok(Self::LightCyan),
+            12 => Ok(Self::LightRed),
+            13 => Ok(Self::Pink),
+            14 => Ok(Self::Yellow),
+            15 => Ok(Self::White),
+            _ => Err(InvalidColor),
+        }
+    }
 }

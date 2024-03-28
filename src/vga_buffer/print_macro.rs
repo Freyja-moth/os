@@ -18,5 +18,5 @@ macro_rules! println {
 
 #[doc(hidden)]
 pub fn _print(args: Arguments) {
-    WRITER.lock().write_fmt(args).unwrap();
+    write!(WRITER.lock(), "{args}").unwrap();
 }

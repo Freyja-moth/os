@@ -8,12 +8,11 @@ pub use crate::{
         Buffer, ScreenChar,
     },
 };
-pub use alloc::boxed::Box;
-pub use core::{
+pub(crate) use core::{
     fmt::{Arguments, Write},
     panic::PanicInfo,
 };
-pub use lazy_static::lazy_static;
-pub use spin::Mutex as SpinMutex;
-pub use uart_16550::SerialPort;
-pub use volatile::Volatile;
+pub(crate) use lazy_static::lazy_static;
+pub(crate) use spin::Mutex as SpinMutex;
+pub(crate) use uart_16550::SerialPort;
+pub(crate) use volatile::Volatile;
