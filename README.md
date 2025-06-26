@@ -1,4 +1,4 @@
-A basic operating system written in rust following [this](https://os.phil-opp.com/).
+A basic operating system written in rust following [this](https://os.phil-opp.com/) tutorial.
 
 ## Running
 
